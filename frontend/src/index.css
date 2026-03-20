@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #1A73E8;
+  --primary-dark: #0D47A1;
+  --accent: #FF6F00;
+  --accent-light: #FFF3E0;
+  --success: #2E7D32;
+  --warning: #F9A825;
+  --danger: #C62828;
+  --dark: #0D2137;
+  --slate: #455A64;
+  --border: #E3EAF4;
+  --bg-light: #F7F9FC;
+  --white: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', 'Nunito', sans-serif;
+  background-color: var(--bg-light);
+  color: var(--dark);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-light); }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+/* ── Global Utilities ──────────────────────────────────────────────────────── */
+@layer components {
+  .gs-card {
+    @apply bg-white rounded-2xl shadow-card border border-border p-6;
+  }
+  .gs-card-hover {
+    @apply gs-card transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1;
+  }
+  .gs-btn-primary {
+    @apply bg-gradient-to-r from-primary to-primary-dark text-white font-bold py-3 px-6 rounded-xl
+           transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 active:scale-95
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .gs-btn-accent {
+    @apply bg-gradient-to-r from-accent to-orange-700 text-white font-bold py-3 px-6 rounded-xl
+           transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 active:scale-95;
+  }
+  .gs-btn-outline {
+    @apply border-2 border-primary text-primary font-bold py-3 px-6 rounded-xl
+           transition-all duration-200 hover:bg-primary hover:text-white;
+  }
+  .gs-input {
+    @apply w-full border border-border rounded-xl px-4 py-3 text-dark placeholder-slate/50
+           focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary
+           transition-all duration-200;
+  }
+  .gs-label {
+    @apply block text-sm font-semibold text-slate mb-1.5;
+  }
+  .gs-badge {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold;
+  }
+  .gs-stat-card {
+    @apply gs-card flex items-start gap-4;
+  }
+  .gs-section {
+    @apply py-16 md:py-24;
+  }
+  .gs-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  .gs-gradient-text {
+    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+  }
+}
+
+/* ── Animations ────────────────────────────────────────────────────────────── */
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes ping-slow {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.5; }
+}
+
+.animate-slide-up { animation: slideInUp 0.5s ease forwards; }
+.animate-fade-in { animation: fadeIn 0.4s ease forwards; }
+.animate-ping-slow { animation: ping-slow 2s ease-in-out infinite; }
+
+.skeleton {
+  background: linear-gradient(90deg, #E3EAF4 25%, #F7F9FC 50%, #E3EAF4 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* ── Alert Banner ──────────────────────────────────────────────────────────── */
+.alert-banner {
+  background: linear-gradient(135deg, #FF6F00, #E65100);
+  animation: pulse 2s infinite;
+  border-left: 4px solid #FF8F00;
+}
+
+/* ── Hero Gradient ─────────────────────────────────────────────────────────── */
+.hero-gradient {
+  background: linear-gradient(135deg, #0D2137 0%, #1A73E8 50%, #0D47A1 100%);
+}
+
+/* ── Gauge meter ───────────────────────────────────────────────────────────── */
+.gauge-container {
+  position: relative;
+  width: 160px;
+  height: 80px;
+  overflow: hidden;
+}
+
+/* ── Mobile Bottom Nav ─────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .mobile-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background: white;
+    border-top: 1px solid var(--border);
+    padding: 8px 0;
+    display: flex;
+    justify-content: space-around;
+  }
+}
+
+/* ── Sidebar ───────────────────────────────────────────────────────────────── */
+.sidebar-link {
+  @apply flex items-center gap-3 px-4 py-3 rounded-xl text-slate font-medium
+         transition-all duration-200 hover:bg-primary/10 hover:text-primary;
+}
+.sidebar-link.active {
+  @apply bg-primary/10 text-primary font-semibold;
+}
+
+/* ── OTP Input ─────────────────────────────────────────────────────────────── */
+.otp-input {
+  width: 48px;
+  height: 56px;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  outline: none;
+  transition: all 0.2s;
+}
+.otp-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
+}
+.otp-input.filled {
+  border-color: var(--success);
+  background: #E8F5E9;
+}
